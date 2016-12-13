@@ -1,0 +1,23 @@
+<section class="auth-form" ng-controller="loginCtrl"> 
+
+<h1>Whistler</h1>
+<h4> Help is a whistle away.</h4>
+	<h4>Login or Register to start Whistling</h4>
+	<div >
+	Email: <input type="text" autofocus="true" ng-model="account.email"> 
+	</div>
+	<div>
+	Password: <input type="password" ng-model="account.password">
+	</div>
+	<div>
+	<button class="btn btn-info" ng-click="login()">Login</button>
+	<button class="btn btn-default" ng-click="register()">Register</button>
+	<button class="btn btn-info" ng-click="logout()">Logout</button>
+	<h4> OR Sign in with Google!</h4>
+	<button class="btn btn-info" ng-click="loginGoogle()">Sign In</button>
+  </div>
+
+	</div>
+</section>
+	
+	
