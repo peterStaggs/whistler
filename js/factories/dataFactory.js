@@ -2,10 +2,10 @@
 
  app.factory("dataFactory", function($http, authFactory, fbCreds) {
  	console.log('datafactory loaded');
+ 	var currentUser;
 
-// USER POST AND GETTER
+// USER POST, PUT AND GETTER
 		let postUser = (userObject) => {
- 		currentUser = authFactory.getUser(); 
  		return new Promise((resolve, reject) => {
  			console.log('resolve', resolve);
  			$http.post(`${fbCreds.databaseURL}/user.json`, angular.toJson(userObject))
@@ -21,7 +21,7 @@
 		});
 	};
  	
- 	let updateUser = (userObject) => {
+ 		let updateUser = (userObject) => {
  		currentUser = authFactory.getUser(); 
  		return new Promise((resolve, reject) => {
  			console.log('resolve', resolve);
@@ -83,7 +83,6 @@
 	let outingGetter = () => {
 		let outing = []; 
 		console.log('outing', outing)
-
 		return new Promise((resolve, reject) => {
 			$http.get(`${fbCreds.databaseURL}/outing.json`)
 			.success((outingObject) => {
@@ -103,9 +102,69 @@
 
 	}; 
 
+// Contact POST, PUT AND GETTER
+
+		let postContact = (contactObject) => {
+		console.log('107 contactobj', contactObject);
+
+ 		currentUser = authFactory.getUser(); 
+
+ 		return new Promise((resolve, reject) => {
+ 			console.log('contactobj', contactObject);
+ 			$http.post(`${fbCreds.databaseURL}/contact.json`, angular.toJson(contactObject))
+ 			.success((contactObject) => {
+ 				contactObject.id = contactObject.name;
+ 				resolve(contactObject);
+ 			})
+ 	
+ 	.error( (error) => {
+			reject(error);
+		  });
+		});
+	};
+ 	
+ 		let updateContact = (contactObject) => {
+ 		currentUser = authFactory.getUser(); 
+ 		return new Promise((resolve, reject) => {
+ 			$http.put(`${fbCreds.databaseURL}/contact.json?orderBy='uid'&equalTo='${currentUser}'`, angular.toJson(contactObject))
+ 			.success((userObject) => {
+ 				contactObject.id = contactObject.name;
+ 				resolve(contactObject);
+ 			})
+ 	
+ 	.error( (error) => {
+			reject(error);
+		  });
+		});
+	};
+
+	let contactGetter = () => {
+		let contact = []; 
+		console.log('contact', contact)
+
+		return new Promise((resolve, reject) => {
+			$http.get(`${fbCreds.databaseURL}/contact.json`)
+			.success((contactObject) => {
+				let contactInfo = contactObject;
+				console.log('contactinfo', contactInfo);
+				Object.keys(contactInfo).forEach( (key) => {
+					contactInfo[key].id = key; 
+					contact.push(contactInfo[key]); 
+
+				});
+				resolve(contact); 
+			})
+			.error((error) => {
+				reject(error);
+			});
+
+		}); 
+
+	}; 
+
 // RETURN ALL FUNCTIONS 
 
-return {postUser, postOuting, updateUser, userGetter, outingGetter};
+return {postUser, postOuting, postContact, updateUser, updateContact, userGetter, outingGetter, contactGetter};
 
 }); 
  	
