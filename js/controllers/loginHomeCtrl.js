@@ -9,30 +9,30 @@ app.controller('loginHomeCtrl', function($scope, authFactory, dataFactory, $wind
 
     dataFactory.postContact(contactObject); 
 
+
 // Define the Object Containing info from the "Who am I" form as an object
 
-function userFunction() {
+
 	let userObject = {
 	    uid:null, 
-      userName: 'cool',
-      firstName: 'bro',
-      lastName: 'vfecd',
-      address: 'bvfecd',
-      city: 've',
-      state: 'CA',
-      biography: 'wgvfe',
-      postalCode: 'wvefd',
+      userName: '',
+      firstName: '',
+      lastName: '',
+      address: '',
+      city: '',
+      state: '',
+      biography: '',
+      postalCode: '',
       contactOne: ''
     };
 
 // Add a UID to the Personal Info
     userObject.uid = authFactory.getUser();
-  	dataFactory.postUser(obj)
+  	dataFactory.postUser(userObject)
   	.then((userObject) => {
   	console.log('userObj', userObject);
 	 });
-  };
-
+ 
 // Update the contact information 
   let updateUser = (userObject) => {
     datafactory.updateUser(userObject); 
@@ -79,6 +79,8 @@ function outingFunction() {
   let updateContact = (contactObject) => {
     datafactory.updateContact(contactObject); 
   }; 
+
+    dataFactory.postUser(userObject); 
 
 
 }); 

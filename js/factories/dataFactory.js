@@ -1,6 +1,37 @@
  "use strict"; 
 
  app.factory("dataFactory", function($http, authFactory, fbCreds) {
+
+ 	//Possibly use date.now
+ 	
+
+	function sendTextMessage (to, body) {
+		var TWILIO_ACCOUNT_SID = ''
+		var TWILIO_API_SID = ''
+		var TWILIO_API_SECRET = ''
+		//primitive encryption/obfuscation/compression 
+		var TWILIO_API_AUTH_BASE64 = btoa(TWILIO_API_SID + ':' + TWILIO_API_SECRET)
+		var TWILIO_API_URL = `https://api.twilio.com/2010-04-01/Accounts/${TWILIO_ACCOUNT_SID}/Messages.json`
+		//Headers will always be sent with a http request--you can inspect these in network tab
+		var TWILIO_API_HEADERS = {
+			headers: {
+				'Authorization': `Basic ${TWILIO_API_AUTH_BASE64}`,
+				//this is the default form content type
+				'Content-Type': 'application/x-www-form-urlencoded'
+			}
+		}
+
+		var from = '+17078193060'
+
+		$http
+			.post(TWILIO_API_URL,
+				`To=${to}&From=${from}&Body=${body}`,
+				TWILIO_API_HEADERS)
+			.then(console.log)
+	}
+
+ 	sendTextMessage('', 'Hey from Scott')
+
  	console.log('datafactory loaded');
  	var currentUser;
 

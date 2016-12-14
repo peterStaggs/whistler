@@ -1,13 +1,23 @@
 <!-- MAIN PROFILE PAGE -->
 
 <header>
-<h2>Welcome to Whistler!</h2>
+	<h2>Welcome to Whistler!</h2>
 </header>
 
 
 <!-- PERSONAL INFO FORM BUTTON -->
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Personal and Contact Info</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Personal Info</button>
+
+<!-- CONTACT INFO BUTTON -->
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">My Contacts</button>
+
+<!-- OUTINGS BUTTON -->
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Add an Outing</button>
+
+
 
 <!-- PERSONAL INFO FORM -->
 
@@ -15,13 +25,13 @@
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
 	
-<div ng-controller="DemoCtrl" layout="column" ng-cloak class="md-inline-form">
+<div ng-controller="loginHomeCtrl" layout="column" ng-cloak class="md-inline-form">
 
   <md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding>
     <div>
       <md-input-container>
         <label>User Name</label>
-        <input ng-model="user.title">
+        <input ng-model="userObject.userName">
       </md-input-container>
 	</div>
   </md-content>
@@ -109,10 +119,6 @@
   </div>
 </div>
 
-<!-- CONTACT INFO BUTTON -->
-
-
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">My Outings</button>
 
 
 

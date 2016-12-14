@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/stagg0saurus/whistler#readme",
   "devDependencies": {
+    "browserify": "^13.1.1",
     "express": "^4.14.0",
     "twilio": "^2.11.1"
   }
