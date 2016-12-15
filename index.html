@@ -1,20 +1,23 @@
 <!DOCTYPE html>
-<html ng-app="whistler">
+<html ng-app="whistler" class='fill'>
 <head>
   <title>Whistler</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+<link rel="stylesheet" href="css/styles.css">
 </head>
 
-	<body >
-		<main id="wrapper" class="container">
-			<div ng-view>
+	<body ng-view>
+		
+		
+			<div >
 			</div>
-		</main>
 
 
 
 <!-- Dependencies -->
+
+
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
@@ -28,32 +31,22 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+<script src="bower_components/angular-timer/dist/angular-timer.min.js"></script>
 
 
-<!-- Providers/Controllers -->
-<!-- <script data-main="scripts/main" src="twilio/require.js"></script>
- --><script src="js/app.js"></script>
+
+
+
+<!-- LOCAL FILES -->
+<script src="js/app.js"></script>
 <script src="js/cookie.js"></script>
 <script src="js/whoAmI.js"></script>
 <script src="js/fbCreds.js"></script>
 <script src="js/controllers/loginCtrl.js"></script>
 <script src="js/controllers/loginHomeCtrl.js"></script>
+<script src="js/controllers/messageCtrl.js"></script>
 <script src="js/factories/authFactory.js"></script>
 <script src="js/factories/dataFactory.js"></script>
-<script src="twilio/administrators.json"></script>
-<script src="twilio/config.js"></script>
-<script src="twilio/twilioClient.js"></script>
-<script src="twilio/twilioNotifications.js"></script>
-<script src="twilio/webapp.js"></script>
-
-
-
-
-
-
-
-
-
 
 
 	</body>

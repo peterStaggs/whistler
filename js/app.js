@@ -44,6 +44,12 @@ app.config( function($routeProvider) {
 
 
 	})
+	.when('/logout', {
+		templateUrl: 'views/login.html',
+		controller: 'loginCtrl'
+
+	})
+
 	
 
 });

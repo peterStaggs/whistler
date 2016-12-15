@@ -35,7 +35,7 @@ app.controller('loginCtrl', function($scope, authFactory, $window, $location){
 		$scope.logout = () => {
 		authFactory.logoutUser($scope.account)
 		.then( (user) => {
-			$window.location.href = "#/items/list"; 
+			$window.location.href = "#/"; 
 					console.log('user logged out');
 				});
 			};
