@@ -1,4 +1,5 @@
 .DS_Store
 js/fbCreds.js
 node_modules
+bower_components
  
