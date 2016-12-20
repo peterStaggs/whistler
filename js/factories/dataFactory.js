@@ -98,7 +98,7 @@
 					outing.push(outingInfo[key]); 
 
 				});
-				resolve(outing); 
+				resolve(outingInfo); 
 			})
 			.error((error) => {
 				reject(error);
