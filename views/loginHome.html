@@ -1,54 +1,148 @@
 <!-- MAIN PROFILE PAGE -->
-
-<header>
-	<h2>Welcome to Whistler!</h2>
-</header>
-
-
 <!-- PERSONAL INFO FORM BUTTON -->
-
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Personal Info</button>
-<br>
-<br>
-
-
-<div ng-controller="messageCtrl" layout="column" ng-cloak class="md-inline-form">
-<form>
-
-	Set Contact Number:<input type='text' placeholder="Phone Number:" ng-model= "message.phone"><br><br>
-	Set Timer Duration (in Minutes):<input type='number' placeholder="Set Timer Duration:" ng-model="timeAmount.time"><br><br>
-	Customize Message <input type='text' placeholder="Message:" ng-model= "message.text"><br><br>
-	<button ng-click="setTimer()">Set Message Timer</button><br><br>
-	<button ng-click="stopTimer()">Stop Message Timer</button>
-	<br>
-	<br>
-<div ng-controller="loginCtrl">
-	<button class="btn btn-info" ng-click="logout()">Logout</button>
-</div>
-
-
-
-
-
-
-
-
-</form>
-
-
-</div>
-
 <!-- LOGIN POPUP W/ INIT -->
+<div ng-controller="outingController">
+    <md-toolbar md-scroll-shrink>
+        <div class="md-toolbar-tools">
+            <h3>{{ message }}</h3>
+            <p><strong>WHISTLER</strong></p>
+            <br>
+            <md-button ng-click="openSidebar()">
+                <md-icon class="mdi mdi-plus-circle"></md-icon>
+                New Outing
+            </md-button>
+            <br>
+            <md-button>
+                <md-icon class="mdi mdi-plus-circle"></md-icon>
+                Personal Info
+            </md-button>
+            <br>
+            <md-button ng-click="showFilters = !showFilters">
+                <md-icon class="mdi mdi-magnify"></md-icon>
+                Filters
+            </md-button>
+        </div>
+    </md-toolbar>
+    <div class="filters" layout="row" layout-align="center center" ng-show="showFilters">
+        <md-input-container>
+            <label>Enter a Search Term</label>
+            <input ng-model="outingsFilter" type="text">
+        </md-input-container>
+        <md-input-container>
+            <label>Category</label>
+            <md-select ng-model="category">
+                <md-option ng-repeat="category in categories" value="{{ category }}">
+                    {{ category.uid }}
+                </md-option>
+            </md-select>
+        </md-input-container>
+        <div layout="row">
+            <md-button ng-click="outingsFilter = '';category=''" class="md-warn">
+                Clear
+            </md-button>
+        </div>
+    </div>
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
+        <md-toolbar class="md-theme-light">
+            <h1 class="md-toolbar-tools">{{ sidebarTitle }}</h1>
+        </md-toolbar>
+        <md-content layout-padding>
+            <md-input-container>
+                <label for="title">Title</label>
+                <input type="text" id="title" ng-model="outing.title" md-autofocus>
+            </md-input-container>
+            <md-input-container>
+                <label for="price">Price</label>
+                <input type="text" id="price" ng-model="outing.price">
+            </md-input-container>
+            <md-input-container>
+                <label for="description">Description</label>
+                <textarea type="text" id="description" ng-model="outing.description">
+                </textarea>
+            </md-input-container>
+            <md-input-container>
+                <label for="category">category</label>
+                <textarea type="text" id="category" ng-model="outing.categories">
+                </textarea>
+            </md-input-container>
+            <md-input-container>
+                <label for="image">Image Link</label>
+                <input type="text" id="image" ng-model="outing.image">
+            </md-input-container>
+            <div ng-controller="messageCtrl">
+                <md-input-container>
+                    <label for="contactNumber">Contact Number</label>
+                    <input type="text" id="title" ng-model="message.phone" md-autofocus>
+                </md-input-container>
+                <md-input-container>
+                    <label for="contactNumber">Set Timer in Minutes</label>
+                    <input type="text" id="title" ng-model="timeAmount.time" md-autofocus>
+                </md-input-container>
+                <md-input-container>
+                    <label for="contactNumber">Message Body</label>
+                    <input type="text" id="title" ng-model="message.text" md-autofocus>
+                </md-input-container>
+                <md-button ng-click="setTimer()">Set Message Timer</md-button>
+                <md-button ng-click="stopTimer()">Stop Message Timer</md-button>
+            </div>
+            <md-button ng-if="!editing" ng-click="saveOuting(outing)" class="md-primary">
+                Save
+            </md-button>
+            <md-button ng-if="editing" ng-click="saveEdit()" class="md-primary">
+                Save Edit
+            </md-button>
+            <md-button ng-click="closeSidebar()" class="md-warn">
+                Cancel
+            </md-button>
+        </md-content>
+    </md-sidenav>
+    <md-content class="md-padding" layout="row" layout-wrap>
+        <md-card ng-repeat="outing in outings">
+            <img ng-src="{{ outing.image }}" class="md-card-image">
+            <md-card-content>
+                <div class="classified-info" ng-show="!showContact">
+                    <h2 class="md-title">{{ outing.title }}</h2>
+                    <h3>{{ outing.price | currency }}</h3>
+                    <p>{{ outing.description }}</p>
+                </div>
+                <div class="classified-contact" ng-show="showContact">
+                    <p>
+                        <md-icon class="mdi mdi-account"></md-icon> {{ outing.contact.name }}</p>
+                    <p>
+                        <md-icon class="mdi mdi-phone"></md-icon> {{ outing.contact.phone }}</p>
+                    <p>
+                        <md-icon class="mdi mdi-email"></md-icon> {{ outing.contact.email }}</p>
+                </div>
+                <div layout="row">
+                    <md-button ng-click="showContact = true" ng-show="!showContact">
+                        Contact
+                    </md-button>
+                    <md-button ng-click="showContact = false" ng-show="showContact">
+                        Details
+                    </md-button>
+                    <md-button ng-click="showAdmin = true" ng-show="!showAdmin">
+                        Admin
+                    </md-button>
+                    <md-button ng-click="showAdmin = false" ng-show="showAdmin">
+                        Close
+                    </md-button>
+                </div>
+                <div class="classified-admin" ng-if="showAdmin">
+                    <h3>Admin</h3>
+                    <div layout="row">
+                        <md-button class="md-primary" ng-click="editOuting(outing)">
+                            Edit
+                        </md-button>
+                        <md-button class="md-warn" ng-click="deleteOuting($event, outing)">
+                            Delete
+                        </md-button>
+                    </div>
+                </div>
+            </md-card-content>
+        </md-card>
+    </md-content>
+</div>
 <div ng-controller="AppCtrl" class="md-padding" id="popupContainer" ng-cloak ng-init="showAlert($event)">
-
-  <div class="dialog-demo-content" layout="row" layout-wrap layout-margin layout-align="center">
-
-
-
-
-
-
-
-
-
-    
+    <div class="dialog-demo-content" layout="row" layout-wrap layout-margin layout-align="center">
+    </div>
+</div>

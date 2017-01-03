@@ -39,7 +39,6 @@ app.config( function($routeProvider) {
 	})
 	.when('/login', {
 		templateUrl: 'views/loginHome.html',
-		controller: 'loginHomeCtrl',
 		resolve: {isAuth}
 
 
@@ -49,6 +48,7 @@ app.config( function($routeProvider) {
 		controller: 'loginCtrl'
 
 	})
+	
 
 	
 

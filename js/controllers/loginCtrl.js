@@ -1,6 +1,6 @@
 "use strict"; 
 
-app.controller('loginCtrl', function($scope, authFactory, $window, $location){
+app.controller('loginCtrl', function($scope, authFactory, $window, $location, dataFactory){
 	$scope.account = {
 		email: "", 
 		password: "" //could also be null
@@ -45,10 +45,11 @@ app.controller('loginCtrl', function($scope, authFactory, $window, $location){
 		authFactory.authWithProvider()
 		.then(function(result) {
 	    	var user = result.user.uid;
+	    	dataFactory.setUser(user);
 	    	console.log("logged in user:", user);
 	    	console.log('user logged in', user);
 	    	//Once logged in, go to another view
-	    	$location.path("login");
+	    	$location.path("login"); //loginhome
 	    	$scope.$apply();
 	  	}).catch(function(error) {
 	    	// Handle the Errors.

@@ -12,7 +12,7 @@ app.controller('AppCtrl', function($scope, $mdDialog) {
         .parent(angular.element(document.querySelector('#popupContainer')))
         .clickOutsideToClose(true)
         .title('Welcome to Whistler!')
-        .textContent('This is your shiny new profile page! To start Whistling, please click the "Who am I?" button above and fill out the brief information sheet.')
+        .textContent('Hello again.')
         .ariaLabel('Alert Dialog Demo')
         .ok('Got it!')
         .targetEvent(ev)
