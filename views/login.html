@@ -1,11 +1,33 @@
-<div class='bg'>
-<div class="auth-form" ng-controller="loginCtrl">
 
-<h1>Whistler</h1>
 
-<h4> Whistle while you roam.</h4>
-<br>
-	<h4>Login or Register to start Whistling</h4>
+<video-bg video-id="'fIlJyZEbrzo'" id="vid" ></video-bg>
+
+<hgroup>
+  <h1>WHISTLER</h1>
+  <h2>Whistle wherever you roam</h2>
+</hgroup>
+<form>
+  <div class="group">
+    <input type="text"><span class="highlight" autofocus="true" ng-model="account.email"></span><span class="bar"></span>
+    <label>Email</label>
+  </div>
+  <div class="group">
+    <input type="email"><span class="highlight"></span><span class="bar"></span>
+    <label>Password</label>
+  </div>
+  <button type="button" class="button buttonBlue">Login
+  <button type="button" class="button buttonBlue">Register
+
+    <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+  </button>
+</form>
+<footer>  <p>Or Login with Google</p>
+<a ng-click="loginGoogle()"><img src="https://cdn0.iconfinder.com/data/icons/social-icons-16/512/Google_Plus-2-512.png"></a>
+</footer>
+
+
+
+<!-- 	<h4>Login or Register to start Whistling</h4>
 	<form>
 	<div>
 	<br>
@@ -25,9 +47,9 @@
 	<h4> OR Sign in with Google!</h4>
 	<button class="btn btn-info" ng-click="loginGoogle()">Sign In</button>
   </div>
-  </form>
+  </form> -->
 
-	</div>
-</div>
+
+
 	
 	

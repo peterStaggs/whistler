@@ -1,23 +1,27 @@
 <!-- MAIN PROFILE PAGE -->
 <!-- PERSONAL INFO FORM BUTTON -->
 <!-- LOGIN POPUP W/ INIT -->
-<div ng-controller="outingController">
-    
-        <div class="md-toolbar-tools">
-            <md-button ng-click="openSidebar()">
-                <md-icon class="mdi mdi-plus-circle"></md-icon>
-                New Outing
-            </md-button>
-          
-        </div>
-   
-    <div ng-controller="userCtrl">
+ <div ng-controller="userCtrl">
         <div ng-include="'views/userForm.html'"></div>
         <md-toolbar md-scroll-shrink>
             <h2> Hello, {{ userObject.firstName + ' ' + userObject.lastName || "no last post" }} </h2>
             <h4> Your Address: {{ userObject.address + ', ' + userObject.city  + ', ' + userObject.state + ', '  + userObject.zip }} ||| Your Contacts: {{ userObject.contactOne + ', ' + userObject.contactTwo }}</h4>
         </md-toolbar>
     </div>
+<div ng-controller="outingController">
+    <div class="md-toolbar-tools">
+        <md-button ng-click="openSidebar()">
+            <md-icon class="mdi mdi-plus-circle"></md-icon>
+            New Outing
+        </md-button>
+    </div>
+    <div class="md-toolbar-tools" ng-controller="userCtrl">
+        <md-button ng-click="openPersonalSidebar()">
+            <md-icon class="mdi mdi-plus-circle"></md-icon>
+            Edit Personal Info
+        </md-button>
+    </div>
+   
     <div class="filters" layout="row" layout-align="center center" ng-show="showFilters">
         <md-input-container>
             <label>Enter a Search Term</label>

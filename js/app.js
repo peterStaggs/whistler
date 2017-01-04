@@ -1,5 +1,11 @@
 "use strict"; 
-var app = angular.module("whistler", ["ngRoute", 'ngMaterial']);
+var app = angular.module("whistler", ["ngRoute", 'ngMaterial', 'angular-loading-bar', 'ngAria', 'ngAnimate', 'angularVideoBg'])
+ .config(function($mdThemingProvider) {
+      $mdThemingProvider.theme('default')
+      .dark();
+        // .primaryPalette('blue-grey')
+        // .accentPalette('orange');
+    });
 
 // GIVE CURRENT USER A VALUE ON LOGIN
 
