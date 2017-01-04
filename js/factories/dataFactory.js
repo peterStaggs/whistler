@@ -4,100 +4,23 @@
 
      var currentUser;
 
-     // USER POST, PUT AND GETTER
-     let postOuting = (userObject) => {
-         return new Promise((resolve, reject) => {
-             console.log('resolve', resolve);
-             $http.post(`${fbCreds.databaseURL}/user.json`, angular.toJson(userObject))
-                 .success((userObject) => {
-                     userObject.id = userObject.name;
-
-                     console.log('userObject name', userObject.name)
-                     resolve(userObject);
-                 })
-
-             .error((error) => {
-                 reject(error);
-             });
-         });
-     };
-
-     let outingGetter = () => {
-         let outing = [];
-         console.log('outing', outing)
-         return new Promise((resolve, reject) => {
-             $http.get(`${fbCreds.databaseURL}/user.json`)
-                 .success((outingObject) => {
-                     let outingInfo = outingObject;
-                     Object.keys(outingInfo).forEach((key) => {
-                         outingInfo[key].id = key;
-                         outing.push(outingInfo[key]);
-
-                     });
-                     console.log('outinginfo', outingInfo)
-                     resolve(outingInfo);
-
-                 })
-                 .error((error) => {
-                     reject(error);
-                 });
-
-         });
-
-     };
-
-     let updateUser = (userObject) => {
-         currentUser = authFactory.getUser();
-         return new Promise((resolve, reject) => {
-             console.log('resolve', resolve);
-             $http.patch(`${fbCreds.databaseURL}/user.json?orderBy='uid'&equalTo='${userObject.uid}'`, angular.toJson(userObject))
-                 .success((userObject) => {
-                     resolve(userObject);
-                 })
-
-             .error((error) => {
-                 reject(error);
-             });
-         });
-     };
-
-     let setUser = (toes) => {
+      let setUser = (toes) => {
          currentUser = toes;
      }
 
-     let userGetter = () => {
-         let user = [];
-         console.log('user', user)
+     let getSingleUid = () => {
+        return currentUser;
+     } 
 
-         return new Promise((resolve, reject) => {
-             $http.get(`${fbCreds.databaseURL}/user.json`)
-                 .success((userObject) => {
-                     console.log('userobject from get', userObject);
-                     let userInfo = userObject;
-                     Object.keys(userInfo).forEach((key) => {
-                         userInfo[key].id = key;
-                         user.push(userInfo[key]);
-
-                     });
-                     resolve(user);
-                 })
-                 .error((error) => {
-                     reject(error);
-                 });
-
-         });
-
-     };
-
-     // OUTING POST AND GETTER
-
-     let postUser = (outingObject) => {
-
+     // USER POST, PUT AND GETTER
+     let postOuting = (outingObject) => {
          return new Promise((resolve, reject) => {
              console.log('resolve', resolve);
              $http.post(`${fbCreds.databaseURL}/outing.json`, angular.toJson(outingObject))
                  .success((outingObject) => {
                      outingObject.id = outingObject.name;
+
+                     console.log('outingObject name', outingObject.name)
                      resolve(outingObject);
                  })
 
@@ -107,12 +30,52 @@
          });
      };
 
+     let outingGetter = (user) => {
+         let outing = [];
+         console.log('outing', outing)
+         return new Promise((resolve, reject) => {
+             $http.get(`${fbCreds.databaseURL}/outing.json?orderBy="uid"&equalTo="${user}"`)
+                 .success((outingObject) => {
+                     let outingInfo = outingObject;
+                     Object.keys(outingInfo).forEach((key) => {
+                         outingInfo[key].id = key;
+                         outing.push(outingInfo[key]);
+
+                     });
+                     console.log('outinginfo', outingInfo)
+                     resolve(outing);
+
+                 })
+                 .error((error) => {
+                     reject(error);
+                 });
+
+         });
+
+     };
+
+     let editOuting = () => {
+
+     }
+
+     let deleteOuting = (outingID) => {
+        return new Promise((resolve, reject) => { 
+        $http.delete(`${fbCreds.databaseURL}/outing/${outingID}.json`)
+        .success((outing) => {
+            resolve(outing);
+        })
+    });
+
+        
+     }
+
+
 
 
 
 
      // RETURN ALL FUNCTIONS 
 
-     return { postUser, postOuting, updateUser, userGetter, outingGetter, setUser };
+     return { postOuting, outingGetter, editOuting, deleteOuting, setUser, getSingleUid };
 
  });

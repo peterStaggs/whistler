@@ -2,14 +2,47 @@
 
 angular
     .module('whistler')
-    .controller('outingController', function($http, $scope, $mdSidenav, $mdDialog, $mdToast, dataFactory) {
+    .controller('outingController', function($http, $scope, $mdSidenav, $mdDialog, $mdToast, dataFactory, authFactory) {
 
 
-        dataFactory.outingGetter().then(function(data) {
-            console.log('data', data)
-            $scope.outings = data;
-            // $scope.outings = $scope.outingGetter($scope.outings);
-        });
+        // dataFactory.outingGetter().then(function(data) {
+        //     console.log('data', data)
+        //     $scope.outings = data;
+        //     // $scope.outings = $scope.outingGetter($scope.outings);
+        // });
+
+        $scope.outingObject = {
+            uid: null,
+            Date: 'today',
+            startTime: 'now',
+            endTime: 'later',
+            imWith: 'people',
+            map: 'a url',
+        };
+
+        $scope.outingObject.uid = authFactory.getUser();
+        dataFactory.outingGetter($scope.outingObject.uid)
+            .then((outingData) => {
+                console.log('outingData', outingData);
+                $scope.outings = outingData;
+                $scope.$apply();
+            });
+
+
+
+
+        $scope.buttonPost = function() {
+            dataFactory.postOuting($scope.outingObject)
+                .then((data) => {
+                    return dataFactory.outingGetter($scope.outingObject.uid);
+                })
+                .then((outingData) => {
+                    console.log('outingData', outingData);
+                    $scope.outings = outingData;
+                    $scope.$apply();
+                });
+
+        }
 
 
 
@@ -38,15 +71,17 @@ angular
             $mdSidenav('left').close();
         }
 
-        $scope.saveOuting = function(outing) {
-            if (outing) {
-                $scope.outing.contact = contact;
-                $scope.outings.push(outing);
-                $scope.outing = {};
-                $scope.closeSidebar();
-                $scope.showToast('Outing Saved');
-            }
-        }
+        // $scope.saveOuting = function(outing) {
+        //     if (outing) {
+        //         $scope.outing.contact = contact;
+        //         $scope.outings.push(outing);
+        //         $scope.outing = {};
+        //         console.log('outing posted');
+        //         $scope.closeSidebar();
+        //         buttonPost();
+        //         $scope.showToast('Outing Saved');
+        //     }
+        // }
 
         $scope.editOuting = function(outing) {
             $scope.editing = true;
@@ -70,27 +105,21 @@ angular
             $mdDialog.show(confirm).then(function() {
                 var index = $scope.outings.indexOf(outing);
                 $scope.outings.splice(index, 1);
+                console.log('delete outing', outing)
+                dataFactory.deleteOuting(outing)
+                .then((data) => {
+                    console.log('delete worked');
+                })
                 $scope.showToast('Poof. Outing Deleted');
             }, function() {
+                console.log('anything')
                 $scope.status = outing.title + ' is still here.';
+                
             });
         };
-        $scope.getCategories = function(outings) {
-            console.log('get outings', outings)
 
-            var categories = [];
 
-            angular.forEach(outings, function(ad) {
-                console.log('ad', ad)
 
-                categories.push(ad.categories);
-                console.log('categories', categories)
-
-            });
-            console.log('searchcategories', categories)
-
-            return _.uniq(categories);
-        }
 
 
     });

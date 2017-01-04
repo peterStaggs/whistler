@@ -1,0 +1,53 @@
+<div class="md-toolbar-tools">
+    <md-button ng-click="openPersonalSidebar()">
+        <md-icon class="mdi mdi-plus-circle"></md-icon>
+        Edit Personal Info
+    </md-button>
+</div>
+<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="leftUser">
+    <md-toolbar class="md-theme-light">
+        <h1 class="md-toolbar-tools">Personal Information</h1>
+    </md-toolbar>
+    <md-content layout-padding>
+    <div>
+        <md-input-container>
+            <label for="firstName">First Name:</label>
+            <input type="text" id="price" ng-model="userObject.firstName">
+        </md-input-container>
+        <md-input-container>
+            <label for="lastName"> Last Name:</label>
+            <input type="text" id="price" ng-model="userObject.lastName">
+        </md-input-container>
+        <md-input-container>
+            <label for="address"> Street Address:</label>
+            <input type="text" id="price" ng-model="userObject.address">
+        </md-input-container>
+        <md-input-container>
+            <label for="address"> City: </label>
+            <input type="text" id="price" ng-model="userObject.city">
+        </md-input-container>
+        <md-input-container>
+            <label for="address"> State: </label>
+            <input type="text" id="price" ng-model="userObject.state">
+        </md-input-container>
+        <md-input-container>
+            <label for="address"> Zip: </label>
+            <input type="text" id="price" ng-model="userObject.state">
+        </md-input-container>
+        <md-input-container>
+            <label for="address"> Emergency Contact One: </label>
+            <input type="text" id="price" ng-model="userObject.contactOne">
+        </md-input-container>
+        <md-input-container>
+            <label for="address"> Emergency Contact Two: </label>
+            <input type="text" id="price" ng-model="userObject.contactTwo">
+        </md-input-container>
+        </div>
+        <md-button ng-if="!editing" ng-click="makePost()" class="md-primary">
+            Save
+        </md-button>
+        <md-button ng-click="closePersonalSidebar()" class="md-warn">
+            Cancel
+        </md-button>
+    </md-content>
+</md-sidenav>

@@ -1,0 +1,57 @@
+<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
+            <md-toolbar class="md-theme-light">
+                <h1 class="md-toolbar-tools">{{ sidebarTitle }}</h1>
+                <!-- Date: 'today',
+          startTime: 'now',
+          endTime: 'later',
+          imWith: 'people',
+          map: 'a url', -->
+            </md-toolbar>
+            <md-content layout-padding>
+                <md-input-container>
+                    <label for="title">Starting Time:</label>
+                    <input type="text" id="title" ng-model="outingObject.startTime" md-autofocus>
+                </md-input-container>
+                <md-input-container>
+                    <label for="price">Ending Time:</label>
+                    <input type="text" id="price" ng-model="outingObject.endTime">
+                </md-input-container>
+                <md-input-container>
+                    <label for="description">Who will you be with?</label>
+                    <textarea type="text" id="description" ng-model="outingObject.imWith">
+                    </textarea>
+                </md-input-container>
+                <md-input-container>
+                    <label for="category">Paste a Google Maps URL here:</label>
+                    <textarea type="text" id="category" ng-model="outingObject.map">
+                    </textarea>
+                </md-input-container>
+                <h2> Now set a Message Timer:</h2>
+                <h4>(The message will be sent if you don't manually stop the timer)
+                <div ng-controller="messageCtrl">
+                    <md-input-container>
+                        <label for="contactNumber">Contact Number</label>
+                        <input type="text" id="title" ng-model="message.phone">
+                    </md-input-container>
+                    <md-input-container>
+                        <label for="contactNumber">Set Timer in Minutes</label>
+                        <input type="text" id="title" ng-model="timeAmount.time">
+                    </md-input-container>
+                    <md-input-container>
+                        <label for="contactNumber">Message Body</label>
+                        <input type="text" id="title" ng-model="message.text">
+                    </md-input-container>
+                    <md-button ng-click="setTimer()">Set Message Timer</md-button>
+                    <md-button ng-click="stopTimer()">Stop Message Timer</md-button>
+                </div>
+                <md-button ng-if="!editing" ng-click="buttonPost()" class="md-primary">
+                    Save
+                </md-button>
+                <md-button ng-if="editing" ng-click="saveEdit()" class="md-primary">
+                    Save Edit
+                </md-button>
+                <md-button ng-click="closeSidebar()" class="md-warn">
+                    Cancel
+                </md-button>
+            </md-content>
+        </md-sidenav>
